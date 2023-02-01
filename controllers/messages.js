@@ -2,13 +2,12 @@ const messagesRouter = require('express').Router()
 const Message = require('../models/chat')
 
 
-messagesRouter.get('/',(req,res) => {
-  Message.find({}).then(messages => {
-    res.json(messages)
-  })
+messagesRouter.get('/', async (req,res) => {
+  const messages = await Message.find({})
+  res.json(messages)
 })
 
-messagesRouter.post('/', (req,res) => {
+messagesRouter.post('/', (req,res,next) => {
   const body = req.body
 
   const message = new Message({
@@ -17,8 +16,8 @@ messagesRouter.post('/', (req,res) => {
   })
 
   message.save().then(savedMessage => {
-    res.json(savedMessage)
-  })
+    res.status(201).json(savedMessage)
+  }).catch(error => next(error))
 })
 
 module.exports = messagesRouter
