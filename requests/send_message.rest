@@ -2,7 +2,6 @@ POST http://localhost:3003/api/messages
 Content-Type: application/json
 
 {
-  "id": 2,
-  "user":"mainio-masa",
-  "message":"hello from rest"
+  "user":"root",
+  "message":"root is hehre"
 }

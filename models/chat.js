@@ -5,7 +5,13 @@ const messageSchema = new mongoose.Schema({
     type:String,
     required:true,
   },
-  message: String,
-})
+  message:{
+    type:String,
+    required:true,
+    minlenght:2,
+  } 
+},
+{ timestamps:{createdAt:true, updatedAt:false} }
+)
 
 module.exports = mongoose.model('Message', messageSchema)

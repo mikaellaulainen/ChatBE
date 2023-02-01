@@ -7,6 +7,15 @@ messagesRouter.get('/', async (req,res) => {
   res.json(messages)
 })
 
+messagesRouter.get('/:id', async (req,res) => {
+  const message = await Message.findById(req.params.id)
+  if(message) {
+    res.json(message)
+  }else{
+    res.status(404).end()
+  }
+})
+
 messagesRouter.post('/', (req,res,next) => {
   const body = req.body
 
